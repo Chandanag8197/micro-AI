@@ -1,0 +1,88 @@
+/* src/App.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.hero-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/assets/banner.png'); /* Make sure this path is correct */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 0 20px; /* Margin for responsiveness on smaller screens */
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  margin: 15px 0 40px;
+  color: #ffdd57;
+  font-style: italic;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  width: 180px;
+  margin: 10px;
+  color: #fff;
+}
+
+.stat-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+}
+
+.stat-card p {
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  margin-top: 30px;
+}
+
+.footer-links a {
+  color: #ffcc00;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
