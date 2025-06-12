@@ -1,0 +1,28 @@
+.developer-container {
+  background: #f0f7ff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.057);
+}
+
+.developer-title {
+  color: #eb7125;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.developer-list {
+  list-style: decimal inside;
+  color: #1e293b;
+  font-size: 1.1rem;
+  padding: 0;
+}
+
+.developer-list li {
+  text-align: center;
+  color: #0ea5e9;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
