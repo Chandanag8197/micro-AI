@@ -326,9 +326,8 @@ main {
 @media (max-width: 600px) {
 
   .main-nav ul {
-    flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 6px;
     background: #039be5;
     width: 100vw;
     padding: 10px 0;
@@ -340,7 +339,7 @@ main {
   .main-nav {
     position: relative;
   }
-  
+
   .login-form {
     width: 95%;
     max-width: 350px;
