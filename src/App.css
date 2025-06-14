@@ -324,6 +324,23 @@ main {
 }
 
 @media (max-width: 600px) {
+
+  .main-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    background: #039be5;
+    width: 100vw;
+    padding: 10px 0;
+    position: absolute;
+    top: 60px; /* adjust if your header is taller */
+    left: 0;
+    z-index: 1001;
+  }
+  .main-nav {
+    position: relative;
+  }
+  
   .login-form {
     width: 95%;
     max-width: 350px;
