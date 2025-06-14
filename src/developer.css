@@ -18,7 +18,7 @@
 .developer-list-scroll {
   margin: 0 auto;                /* Center the list container horizontally */
   max-width: 700px;              /* Adjust as needed */
-  padding: 40px 0;               /* Top/bottom padding */
+  padding: 120px 0;               /* Top/bottom padding */
   background: url('/assets/developer.png') ;       /* Keep background transparent for image */
   color: #222;                   /* White text for contrast */
   font-size: 1.3rem;

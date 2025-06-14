@@ -233,13 +233,14 @@ body, html, #root {
 }
 
 .login-icon {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 2rem;
+  position: fixed;      /* Remove fixed positioning */
+  top: auto;
+  left: auto;
+  margin-left: 16px;     /* Optional: add left padding */
+  font-size: 1rem;
   color: #333;
   text-decoration: none;
-  z-index: 1000;
+  z-index: auto;
   transition: color 0.2s;
   cursor: pointer;
 }
@@ -260,6 +261,11 @@ footer {
   padding: 10px;
   color: #ccc;
   text-align: center;
+}
+
+.main-nav{
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .main-nav ul {
@@ -283,6 +289,9 @@ footer {
   font-weight: bold;
   font-size: 1.1rem;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-nav a:hover {
@@ -311,7 +320,7 @@ footer {
 }
 
 main {
-  margin-top: 100px; /* Same as .fixed-header height */
+  margin-top: 50px; /* Same as .fixed-header height */
 }
 
 @media (max-width: 600px) {

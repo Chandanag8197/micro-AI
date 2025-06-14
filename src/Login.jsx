@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Login({ onBack }) {
   return (
@@ -15,7 +16,7 @@ function Login({ onBack }) {
         </div>
         <button className="login-btn" type="submit">LOGIN</button>
         <div className="register-link">
-          Don’t have an account? <a href="#">Register here</a>
+          Don’t have an account? <Link to="/register">Register here</Link>
         </div>
         <button type="button" className="back-btn" onClick={onBack}>Back to Home</button>
       </form>

@@ -2,14 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
 
-function Home({ onLogin }) {
+function Home() {
   const navigate = useNavigate();
 
   return (
     <div className="main-container">
-      <a href="#" className="login-icon" title="Login" onClick={onLogin}>
-        <FaSignInAlt />
-      </a>
       <div className="hero-container">
         <div className="overlay">
           <h1 className="title">Micro-AI</h1>
