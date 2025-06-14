@@ -1,15 +1,133 @@
-/* src/App.css */
+/* src/App.css  */
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body, html, #root {
-  height: 100%;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  font-family: Arial, sans-serif;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+
+.login-bg {
+  background: #ffe082;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  background: #ffe082;
+  padding: 40px 32px;
+  border-radius: 0;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.login-input {
+  width: 100%;
+  padding: 16px 24px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4fc3f7 0%, #0288d1 100%);
+  color: #222;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.login-input::placeholder {
+  color: #222;
+  opacity: 0.7;
+}
+
+.login-options {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 24px 0;
+  color: #222;
+  font-size: 1rem;
+}
+
+.forgot-link {
+  color: #0288d1;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 16px 0;
+  margin: 16px 0 8px 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f44336 0%, #e040fb 100%);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background 0.2s;
+}
+
+.login-btn:hover {
+  background: linear-gradient(90deg, #e040fb 0%, #f44336 100%);
+}
+
+.register-link {
+  color: #0288d1;
+  font-size: 1rem;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.register-link a {
+  color: #0288d1;
+  text-decoration: underline;
+}
+
+.back-btn {
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: #0288d1;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.main-container {
+  min-height: 100%;      /* Full viewport height */
+  width: 100%;           /* Full viewport width */
+  background: url('/assets/banner.png') no-repeat center center fixed;
+  background-size: cover;    /* Your grey color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;       /* Remove rounded corners if you want full coverage */
+  margin: 0;
+  padding: 0;
 }
 
 .hero-container {
@@ -113,4 +231,106 @@ body, html, #root {
   font-size: 3rem;
   text-align: center;
 }
+
+.login-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  color: #333;
+  text-decoration: none;
+  z-index: 1000;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.login-icon:hover {
+  color: #007bff;
+}
+
+header {
+  background-color: #0288d1;
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+}
+
+footer {
+  background-color: #333;
+  padding: 10px;
+  color: #ccc;
+  text-align: center;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  justify-content: center;   /* centers the links horizontally */
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav li {
+
+  margin: 0 20px;
+}
+
+.main-nav a {
+  color: #fff;               /* Change this to your desired color */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.main-nav a:hover {
+  color: #ffd54f;            /* Change this to your hover color */
+}
+
+.header-title {
+  color: #68167073;         /* Change to your desired color, e.g. #ffd54f or #0288d1 */
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #039be5;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  height: 80px; /* Set your header height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  margin-top: 100px; /* Same as .fixed-header height */
+}
+
+@media (max-width: 600px) {
+  .login-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .stat-card {
+    width: 140px;
+  }
+}
+
 

@@ -2,10 +2,12 @@ import './developer.css';
 
 export default function Developer({ showTopics }) {
   return (
-    <div className="developer-container">
-      <h2 className="developer-title">Top 10 Developer Topics</h2>
+    <div className="developer-fixed-container">
+      <div className="developer-title-fixed">
+        Top 10 Developer Topics
+      </div>
       {showTopics && (
-        <ul className="developer-list">
+        <ul className="developer-list-scroll">
           <li>Data Structures & Algorithms</li>
           <li>Object-Oriented Programming</li>
           <li>System Design Basics</li>

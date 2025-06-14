@@ -2,10 +2,12 @@ import './data-analyst.css';
 
 export default function DataAnalyst({ showTopics }) {
   return (
-    <div className="analyst-container">
-      <h2 className="analyst-title">Top 10 Data Analyst Topics</h2>
+    <div className="analyst-fixed-container">
+      <div className="analyst-title-fixed">
+        Top 10 Data Analyst Topics
+      </div>
       {showTopics && (
-        <ul className="analyst-list">
+        <ul className="analyst-list-scroll">
           <li>Excel Formulas & Functions</li>
           <li>Data Cleaning</li>
           <li>SQL Queries (Joins, Aggregations)</li>

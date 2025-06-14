@@ -1,0 +1,37 @@
+.developer-title-fixed {
+  position: fixed;
+  top: 80px; /* Adjust to your navbar height */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  background: #e0e0e0;
+  color: #1a237e;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;      /* Center the heading */
+  z-index: 999;
+  padding: 5px 0;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.developer-list-scroll {
+  margin: 0 auto;                /* Center the list container horizontally */
+  max-width: 700px;              /* Adjust as needed */
+  padding: 40px 0;               /* Top/bottom padding */
+  background: url('/assets/developer.png') ;       /* Keep background transparent for image */
+  color: #222;                   /* White text for contrast */
+  font-size: 1.3rem;
+  list-style: decimal inside;
+  text-align: center;            /* Center the text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* Center the list items horizontally */
+}
+
+.developer-list-scroll li {
+  color: #222;
+  width: 100%;
+  text-align: center;            /* Center each list item text */
+  margin-bottom: 12px;
+}
