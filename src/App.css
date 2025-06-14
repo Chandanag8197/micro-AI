@@ -325,20 +325,49 @@ main {
 
 @media (max-width: 600px) {
   .login-form {
-    width: 90%;
-    padding: 20px;
+    width: 95%;
+    max-width: 350px;
+    padding: 10vw 4vw;
+    min-width: 0;
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    word-break: break-word;
   }
 
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    word-break: break-word;
   }
 
   .stat-card {
-    width: 140px;
+    width: 90vw;
+    max-width: 300px;
+    min-width: 0;
+    padding: 12px;
+    margin: 8px auto;
+  }
+
+  .main-container,
+  .hero-container,
+  .overlay {
+    padding: 0 2vw;
+    box-sizing: border-box;
+  }
+}
+
+/* Extra: For very small phones */
+@media (max-width: 400px) {
+  .login-form {
+    padding: 6vw 2vw;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .stat-card {
+    font-size: 0.9rem;
+    padding: 8px;
   }
 }
 
