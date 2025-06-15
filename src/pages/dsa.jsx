@@ -1,36 +1,58 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./TopicPage.css";
 import axios from "axios";
 
 export default function DataStructuresAlgorithms() {
-  const [question] = useState("Tell me about yourself.");
+  const [question, setQuestion] = useState(""); // changed from hardcoded question
   const [textAnswer, setTextAnswer] = useState("");
   const [response, setResponse] = useState("");
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
 
-  // Microphone handler
-  const handleMicClick = () => {
-    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+  // ✅ Fetch random question from backend
+  const fetchRandomQuestion = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/questions/random/data-structures");
+      setQuestion(res.data.questionText || "Question not found.");
+      setTextAnswer("");
+      setResponse("");
+    } catch (err) {
+      console.error("Error fetching question:", err);
+      setQuestion("Failed to load question.");
+    }
+  };
+
+  // ✅ Fetch question on first load
+  useEffect(() => {
+    fetchRandomQuestion();
+  }, []);
+
+  // ✅ Set up speech recognition
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
       alert("Speech Recognition is not supported in this browser.");
       return;
     }
 
-    if (!recognitionRef.current) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = "en-US";
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
 
-      recognitionRef.current.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        setTextAnswer(prev => prev ? prev + " " + transcript : transcript);
-      };
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setTextAnswer(prev => prev ? prev + " " + transcript : transcript);
+    };
 
-      recognitionRef.current.onend = () => setListening(false);
-      recognitionRef.current.onerror = () => setListening(false);
-    }
+    recognition.onend = () => setListening(false);
+    recognition.onerror = () => setListening(false);
+
+    recognitionRef.current = recognition;
+  }, []);
+
+  const handleMicClick = () => {
+    if (!recognitionRef.current) return;
 
     if (!listening) {
       setListening(true);
@@ -42,16 +64,17 @@ export default function DataStructuresAlgorithms() {
   };
 
   const handleSubmit = async () => {
-    try {
-      const res = await axios.post('http://localhost:5000/api/submit', {
-        answer: textAnswer,
-      });
-      setResponse(res.data.evaluation || "Answer submitted.");
-    } catch (error) {
-      console.error(error);
-      setResponse("Error submitting answer.");
-    }
-  };
+  try {
+    const res = await axios.post('http://localhost:5000/api/submit', {
+      answer: textAnswer,
+      questionText: question, // <-- sending the current question
+    });
+    setResponse(res.data.evaluation || "Answer submitted.");
+  } catch (error) {
+    console.error(error);
+    setResponse("Error submitting answer.");
+  }
+};
 
   return (
     <div className="topic-bg">
@@ -64,6 +87,13 @@ export default function DataStructuresAlgorithms() {
         <h2 className="ai-interviewer-title">AI Interviewer</h2>
         <div className="ai-question-box">
           <strong>Question:</strong> {question}
+          <button
+            onClick={fetchRandomQuestion}
+            style={{ marginLeft: "10px", fontSize: "16px", cursor: "pointer" }}
+            title="Get New Question"
+          >
+            🔄
+          </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
           <textarea
@@ -81,10 +111,7 @@ export default function DataStructuresAlgorithms() {
             🎤
           </button>
         </div>
-        <button
-          className="ai-submit-btn"
-          onClick={handleSubmit}
-        >
+        <button className="ai-submit-btn" onClick={handleSubmit}>
           Submit Answer
         </button>
         {response && (

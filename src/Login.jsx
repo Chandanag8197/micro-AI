@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-function Login({ onBack }) {
+function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ function Login({ onBack }) {
       const res = await axios.post("https://microai-backend.onrender.com/api/users/login", form);
       localStorage.setItem("token", res.data.token);
       alert("✅ Logged in successfully!");
-      // Redirect or update UI
-      navigate("/dashboard"); // or homepage
+      // Redirect to home page after successful login
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -58,7 +58,13 @@ function Login({ onBack }) {
         <div className="register-link">
           Don’t have an account? <Link to="/register">Register here</Link>
         </div>
-        <button type="button" className="back-btn" onClick={onBack}>Back to Home</button>
+        <button
+          type="button"
+          className="back-btn"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
+        </button>
       </form>
     </div>
   );

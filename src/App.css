@@ -324,27 +324,35 @@ main {
 }
 
 @media (max-width: 600px) {
-
   .main-nav ul {
-    align-items: flex-start;
-    gap: 6px;
-    background: #039be5;
-    width: 100vw;
+    flex-direction: column;
+    gap: 12px;
     padding: 10px 0;
-    position: absolute;
-    top: 60px; /* adjust if your header is taller */
-    left: 0;
-    z-index: 1001;
+    position: static;
+    width: 100%;
+    background: #039be5;
   }
-  .main-nav {
-    position: relative;
+
+  .main-nav li {
+    margin: 0 0 8px 0;
   }
 
   .login-form {
-    width: 95%;
+    width: 98vw;
     max-width: 350px;
-    padding: 10vw 4vw;
+    padding: 8vw 2vw;
     min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .login-input {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  .login-btn {
+    font-size: 1.2rem;
+    padding: 12px 0;
   }
 
   .title {
@@ -358,11 +366,12 @@ main {
   }
 
   .stat-card {
-    width: 90vw;
-    max-width: 300px;
+    width: 95vw;
+    max-width: 320px;
     min-width: 0;
-    padding: 12px;
+    padding: 10px;
     margin: 8px auto;
+    font-size: 1rem;
   }
 
   .main-container,
@@ -371,18 +380,28 @@ main {
     padding: 0 2vw;
     box-sizing: border-box;
   }
+
+  .card {
+    width: 90vw;
+    max-width: 320px;
+    font-size: 1rem;
+    padding: 12px;
+  }
 }
 
-/* Extra: For very small phones */
 @media (max-width: 400px) {
   .login-form {
-    padding: 6vw 2vw;
+    padding: 4vw 1vw;
   }
   .title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   .stat-card {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+  .card {
+    font-size: 0.95rem;
     padding: 8px;
   }
 }
