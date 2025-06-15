@@ -12,7 +12,7 @@ export default function DataStructuresAlgorithms() {
   // ✅ Fetch random question from backend
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random/data-structures");
+      const res = await axios.get("https://microai-backend.onrender.com/api/questions/random/data-structures");
       setQuestion(res.data.questionText || "Question not found.");
       setTextAnswer("");
       setResponse("");
@@ -65,7 +65,7 @@ export default function DataStructuresAlgorithms() {
 
   const handleSubmit = async () => {
   try {
-    const res = await axios.post('http://localhost:5000/api/submit', {
+    const res = await axios.post('https://microai-backend.onrender.com/api/submit', {
       answer: textAnswer,
       questionText: question, // <-- sending the current question
     });
