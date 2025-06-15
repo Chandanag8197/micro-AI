@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Register.css";
 
 export default function Register() {
@@ -22,15 +23,24 @@ export default function Register() {
     setError(""); // Clear error on change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.repeatPassword) {
       setError("Passwords do not match.");
       return;
     }
-    // Add registration logic here
-    alert("Registered!");
-    navigate("/login");
+
+    try {
+      await axios.post("http://localhost:5000/api/users/register", {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      });
+      alert("✅ Registered Successfully!");
+      navigate("/login");
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong!");
+    }
   };
 
   return (
@@ -84,9 +94,7 @@ export default function Register() {
           />
           I agree all statements in <a href="#">Terms of service</a>
         </label>
-        <button className="register-btn" type="submit">
-          SIGN UP
-        </button>
+        <button className="register-btn" type="submit">SIGN UP</button>
         <div className="register-login-link">
           Have already an account?{" "}
           <a
