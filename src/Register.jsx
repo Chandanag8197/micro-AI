@@ -31,7 +31,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/users/register", {
+      await axios.post("https://microai-backend.onrender.com/api/users/register", {
         name: form.name,
         email: form.email,
         password: form.password,

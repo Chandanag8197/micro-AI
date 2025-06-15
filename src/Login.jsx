@@ -15,7 +15,7 @@ function Login({ onBack }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", form);
+      const res = await axios.post("https://microai-backend.onrender.com/api/users/login", form);
       localStorage.setItem("token", res.data.token);
       alert("✅ Logged in successfully!");
       // Redirect or update UI
