@@ -7,4 +7,8 @@ export default defineConfig({
   // server: {
   //   historyApiFallback: true
   // }
+  server: {
+    host: true, // 👈 this exposes to your local network
+    port: 5173
+  }
 })

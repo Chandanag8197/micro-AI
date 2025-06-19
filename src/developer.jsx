@@ -10,8 +10,8 @@ export default function Developer({ showTopics }) {
       {showTopics && (
         <ul className="developer-list-scroll">
           <li><Link to="/topics/data-structures-algorithms">Data Structures & Algorithms</Link></li>
-          {/* <li><Link to="/topics/object-oriented-programming">Object-Oriented Programming</Link></li>
-          <li><Link to="/topics/system-design-basics">System Design Basics</Link></li>
+          <li><Link to="/topics/object-oriented-programming">Object-Oriented Programming</Link></li>
+          {/* <li><Link to="/topics/system-design-basics">System Design Basics</Link></li>
           <li><Link to="/topics/version-control">Version Control (Git)</Link></li>
           <li><Link to="/topics/debugging-testing">Debugging & Testing</Link></li>
           <li><Link to="/topics/apis-web-services">APIs & Web Services</Link></li>

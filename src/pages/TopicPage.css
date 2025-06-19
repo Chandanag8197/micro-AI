@@ -8,13 +8,16 @@
 }
 
 .topic-content {
-  background: rgba(255,255,255,0.85);
-  padding: 40px 60px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.97); /* Nearly opaque white */
+  padding: 100px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Darker, sharper shadow */
   text-align: center;
-  max-width: 80%;
-  margin: auto;
+  max-width: 95%;
+  margin: 20px auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #111; /* Ensures text is dark and readable */
 }
 
 /* AI Interviewer styles */
@@ -86,3 +89,20 @@
   70% { box-shadow: 0 0 0 10px #1976d200; }
   100% { box-shadow: 0 0 0 0 #1976d200; }
 }
+
+@media (max-width: 430px) {
+  .topic-content {
+  background: rgba(255, 255, 255, 0.97); /* Nearly opaque white */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Darker, sharper shadow */
+  text-align: center;
+  max-width: 95%;
+  margin: 20px auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #111; /* Ensures text is dark and readable */
+}
+
+}
+  

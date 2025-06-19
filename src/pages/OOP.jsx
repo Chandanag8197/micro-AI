@@ -1,29 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./TopicPage.css";
 import axios from "axios";
-import { speak } from "../utils/speak"; // ✅ Import the TTS utility
 
-export default function DataStructuresAlgorithms() {
+export default function ObjectOrientedProgramming() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
   const [response, setResponse] = useState("");
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
 
-  // Fetch a random question from backend
+  // Fetch a random OOP question from backend
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random?topics=data-structures,algorithms");
-      const fetchedQuestion = res.data.questionText || "Question not found.";
-      setQuestion(fetchedQuestion);
+      const res = await axios.get("http://localhost:5000/api/questions/random?topics=object-oriented-programming");
+      setQuestion(res.data.questionText || "Question not found.");
       setTextAnswer("");
       setResponse("");
-      speak(fetchedQuestion); // ✅ Speak the question after setting it
     } catch (err) {
       console.error("Error fetching question:", err);
-      const fallback = "Failed to load question.";
-      setQuestion(fallback);
-      speak(fallback); // ✅ Speak error too (optional)
+      setQuestion("Failed to load question.");
     }
   };
 
@@ -31,7 +26,6 @@ export default function DataStructuresAlgorithms() {
     fetchRandomQuestion();
   }, []);
 
-  // Speech recognition setup
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -83,9 +77,9 @@ export default function DataStructuresAlgorithms() {
   return (
     <div className="topic-bg">
       <div className="topic-content">
-        <h1>Data Structures & Algorithms</h1>
+        <h1>Object-Oriented Programming</h1>
         <p>
-          Welcome to the Data Structures & Algorithms page! Here you can learn about arrays, linked lists, trees, sorting, searching, and more.
+          Welcome to the Object-Oriented Programming page! Here you can learn about classes, objects, inheritance, polymorphism, and more.
         </p>
         <hr style={{ margin: "30px 0" }} />
         <h2 className="ai-interviewer-title">AI Interviewer</h2>
@@ -97,13 +91,6 @@ export default function DataStructuresAlgorithms() {
             title="Get New Question"
           >
             🔄
-          </button>
-          <button
-            onClick={() => speak(question)} // ✅ Speak again button
-            style={{ marginLeft: "10px", fontSize: "16px", cursor: "pointer" }}
-            title="Speak Again"
-          >
-            🔊
           </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>

@@ -10,6 +10,7 @@ import Layout from "./Layout";
 import "./App.css";
 import Register from "./Register.jsx";
 import DataStructuresAlgorithms from "./pages/dsa.jsx";
+import ObjectOrientedProgramming from './pages/OOP.jsx';
 import AdminPanel from "./components/AdminPanel.jsx";  
 
 // Simple placeholder component for topic pages
@@ -29,8 +30,8 @@ export default function App() {
         <Route path="data-analyst" element={<DataAnalyst showTopics={true} />} />
         <Route path="upsc" element={<UPSC showTopics={true} />} />
         <Route path="topics/data-structures-algorithms" element={<DataStructuresAlgorithms />} />
-         {/* <Route path="topics/object-oriented-programming" element={<TopicPage name="Object-Oriented Programming" />} />
-        <Route path="topics/system-design-basics" element={<TopicPage name="System Design Basics" />} />
+         <Route path="topics/object-oriented-programming" element={<ObjectOrientedProgramming />} />
+        {/* <Route path="topics/system-design-basics" element={<TopicPage name="System Design Basics" />} />
         <Route path="topics/version-control" element={<TopicPage name="Version Control (Git)" />} />
         <Route path="topics/debugging-testing" element={<TopicPage name="Debugging & Testing" />} />
         <Route path="topics/apis-web-services" element={<TopicPage name="APIs & Web Services" />} />

@@ -323,36 +323,45 @@ main {
   margin-top: 50px; /* Same as .fixed-header height */
 }
 
-@media (max-width: 600px) {
-  .main-nav ul {
-    flex-direction: column;
-    gap: 12px;
-    padding: 10px 0;
-    position: static;
-    width: 100%;
-    background: #039be5;
-  }
-
-  .main-nav li {
-    margin: 0 0 8px 0;
-  }
-
+/* ========== MOBILE VIEW (max-width: 430px) ========== */
+@media (max-width: 430px) {
   .login-form {
-    width: 98vw;
-    max-width: 350px;
-    padding: 8vw 2vw;
-    min-width: 0;
-    box-sizing: border-box;
+    width: 95%;
+    padding: 24px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .login-title {
+    font-size: 1.8rem;
   }
 
   .login-input {
-    font-size: 1rem;
     padding: 12px 16px;
+    font-size: 1rem;
   }
 
   .login-btn {
     font-size: 1.2rem;
     padding: 12px 0;
+  }
+
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .main-container,
+  .hero-container {
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .overlay {
+    padding: 20px;
+    margin: 0 10px;
   }
 
   .title {
@@ -361,49 +370,197 @@ main {
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
     word-break: break-word;
   }
 
   .stat-card {
-    width: 95vw;
-    max-width: 320px;
-    min-width: 0;
-    padding: 10px;
-    margin: 8px auto;
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .card-grid {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    width: 90%;
     font-size: 1rem;
+    padding: 14px;
+  }
+
+  .fixed-header {
+    height: 60px;
+  }
+
+  .header-title {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  .main-nav li {
+    margin: 0;
+  }
+
+  .main-nav a {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== Mobile View: Devices up to 412px wide (Samsung S21 FE, Pixel 7, etc.) ========== */
+@media (max-width: 412px) {
+  body, html, #root {
+    font-size: 14px;
+  }
+
+  .login-bg {
+    padding: 20px;
+  }
+
+  .login-form {
+    width: 95%;
+    padding: 20px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .login-title {
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+
+  .login-input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+
+  .login-btn {
+    font-size: 1.1rem;
+    padding: 12px 0;
+    margin: 14px 0;
+    letter-spacing: 1px;
+  }
+
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    gap: 6px;
+    margin: 12px 0 20px;
+  }
+
+  .forgot-link,
+  .register-link {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .back-btn {
+    font-size: 0.85rem;
   }
 
   .main-container,
-  .hero-container,
+  .hero-container {
+    padding: 0 12px;
+    text-align: center;
+  }
+
   .overlay {
-    padding: 0 2vw;
-    box-sizing: border-box;
+    padding: 20px;
+    margin: 0 12px;
+    border-radius: 12px;
   }
 
-  .card {
-    width: 90vw;
-    max-width: 320px;
-    font-size: 1rem;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 400px) {
-  .login-form {
-    padding: 4vw 1vw;
-  }
   .title {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
+    word-break: break-word;
   }
+
+  .subtitle {
+    font-size: 1rem;
+    margin: 10px 0 20px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+
   .stat-card {
-    font-size: 0.85rem;
-    padding: 6px;
+    width: 100%;
+    padding: 14px;
+    font-size: 0.9rem;
   }
+
+  .stat-card h3 {
+    font-size: 1rem;
+  }
+
+  .stat-card p {
+    font-size: 0.85rem;
+  }
+
+  .card-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0 10px;
+  }
+
   .card {
-    font-size: 0.95rem;
-    padding: 8px;
+    width: 90%;
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .header-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  .fixed-header {
+    height: 60px;
+    padding: 0 10px;
+    justify-content: center;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .main-nav li {
+    margin: 0;
+  }
+
+  .main-nav a {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  .footer-links a {
+    display: block;
+    margin: 6px 0;
+    font-size: 0.9rem;
   }
 }
-
-
