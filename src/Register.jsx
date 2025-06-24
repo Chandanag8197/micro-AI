@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Register.css";
 
@@ -12,26 +12,76 @@ export default function Register() {
     agree: false,
   });
   const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [checkingName, setCheckingName] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  // Password validation function
+  const validatePassword = (password) => {
+    if (password.length < 8) return "Password must be at least 8 characters.";
+    if (!/[A-Z]/.test(password)) return "Password must contain an uppercase letter.";
+    if (!/[0-9]/.test(password)) return "Password must contain a number.";
+    return "";
+  };
+
+  // Check if name is unique (call backend)
+  const checkNameUnique = async (name) => {
+    setCheckingName(true);
+    try {
+      const res = await axios.post("http://localhost:5000/api/users/check-name", { name });
+      setCheckingName(false);
+      return res.data.unique;
+    } catch {
+      setCheckingName(false);
+      return false;
+    }
+  };
+
+  const handleChange = async (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
     setError(""); // Clear error on change
+
+    // Password validation
+    if (name === "password") {
+      setPasswordError(validatePassword(value));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Email must end with @gmail.com
+    if (!form.email.endsWith("@gmail.com")) {
+      setError("Email must be a @gmail.com address.");
+      return;
+    }
+
+    // Passwords must match
     if (form.password !== form.repeatPassword) {
       setError("Passwords do not match.");
       return;
     }
 
+    // Password requirements
+    const pwdErr = validatePassword(form.password);
+    if (pwdErr) {
+      setError(pwdErr);
+      return;
+    }
+
+    // Name uniqueness
+    const unique = await checkNameUnique(form.name.trim());
+    if (!unique) {
+      setError("Name is already taken.");
+      return;
+    }
+
     try {
-      await axios.post("https://microai-backend.onrender.com/api/users/register", {
+      await axios.post("http://localhost:5000/api/users/register", {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -74,6 +124,9 @@ export default function Register() {
           onChange={handleChange}
           required
         />
+        {passwordError && (
+          <div style={{ color: "red", marginBottom: "10px" }}>{passwordError}</div>
+        )}
         <input
           className="register-input"
           type="password"
@@ -92,9 +145,12 @@ export default function Register() {
             onChange={handleChange}
             required
           />
-          I agree all statements in <a href="#">Terms of service</a>
+          {" "}I agree all statements in{" "}
+          <Link to="/terms" style={{ color: "#00bcd4", textDecoration: "underline" }}>
+            Terms of service
+          </Link>
         </label>
-        <button className="register-btn" type="submit">SIGN UP</button>
+        <button className="register-btn" type="submit" disabled={checkingName}>SIGN UP</button>
         <div className="register-login-link">
           Have already an account?{" "}
           <a

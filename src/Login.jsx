@@ -15,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://microai-backend.onrender.com/api/users/login", form);
+      const res = await axios.post("http://localhost:5000/api/users/login", form);
       localStorage.setItem("token", res.data.token);
       alert("✅ Logged in successfully!");
       // Redirect to home page after successful login
@@ -49,11 +49,11 @@ function Login() {
         />
         {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
         <div className="login-options">
-          <label>
-            <input type="checkbox" /> Remember me
-          </label>
-          <a href="#" className="forgot-link">Forgot Password</a>
-        </div>
+  <label>
+    <input type="checkbox" /> Remember me
+  </label>
+  <Link to="/forgot-password" className="forgot-link">Forgot Password</Link>
+</div>
         <button className="login-btn" type="submit">LOGIN</button>
         <div className="register-link">
           Don’t have an account? <Link to="/register">Register here</Link>

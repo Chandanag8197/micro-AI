@@ -1,23 +1,20 @@
+import { Link } from "react-router-dom";
 import './data-analyst.css';
 
 export default function DataAnalyst({ showTopics }) {
   return (
     <div className="analyst-fixed-container">
       <div className="analyst-title-fixed">
-        Top 10 Data Analyst Topics
+        Top 6 Data Analyst Topics
       </div>
       {showTopics && (
         <ul className="analyst-list-scroll">
-          <li>Excel Formulas & Functions</li>
-          <li>Data Cleaning</li>
-          <li>SQL Queries (Joins, Aggregations)</li>
-          <li>Data Visualization (Tableau/Power BI)</li>
-          <li>Python for Data Analysis (Pandas, NumPy)</li>
-          <li>Exploratory Data Analysis (EDA)</li>
-          <li>Statistics & Probability Basics</li>
-          <li>Data Interpretation</li>
-          <li>Dashboards & Reports</li>
-          <li>Business Problem Solving</li>
+          <li><Link to="/topics/excel-formulas-functions">Excel Formulas & Functions</Link></li>
+          <li><Link to="/topics/data-cleaning">Data Cleaning</Link></li>
+          <li><Link to="/topics/sql-queries">SQL Queries (Joins, Aggregations)</Link></li>
+          <li><Link to="/topics/data-visualization">Data Visualization (Tableau/Power BI)</Link></li>
+          <li><Link to="/topics/python-data-analysis">Python for Data Analysis (Pandas, NumPy)</Link></li>
+          <li><Link to="/topics/exploratory-data-analysis">Exploratory Data Analysis (EDA)</Link></li>
         </ul>
       )}
     </div>

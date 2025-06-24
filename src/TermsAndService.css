@@ -1,0 +1,44 @@
+.terms-bg {
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px; /* Adjust this value to match your navbar height */
+}
+
+.terms-container {
+  background: #fff;
+  border-radius: 0rem;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+  border: 1px solid #e5e7eb;
+}
+
+.terms-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a2a3a;
+  letter-spacing: -1px;
+}
+
+.terms-date {
+  font-size: 1rem;
+  color: #64748b;
+}
+
+.terms-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #06b6d4;
+  margin-bottom: 0.5rem;
+}
+
+.terms-link {
+  color: #06b6d4;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.terms-link:hover {
+     color: #0ea5e9;
+}

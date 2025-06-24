@@ -1,0 +1,62 @@
+.about-bg {
+  min-height: 100vh;
+  background: url('./assets/aboutpage.png') center/cover no-repeat fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.about-container {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  max-width: 850px;
+  width: 95%;
+  padding: 40px 32px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.about-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 18px;
+  color: #2d3a4a;
+  font-weight: 700;
+}
+
+.about-container h2 {
+  font-size: 1.4rem;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: #3b4a5a;
+  font-weight: 600;
+}
+
+.about-container p {
+  font-size: 1.08rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.about-container ul {
+  margin-left: 22px;
+  color: #444;
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+}
+
+.about-container li {
+  margin-bottom: 10px;
+}
+
+.about-container a {
+  color: #2a6eea;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.about-container a:hover {
+  color: #174ea6;
+}

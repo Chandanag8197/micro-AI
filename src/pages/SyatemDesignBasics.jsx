@@ -3,17 +3,17 @@ import "./TopicPage.css";
 import axios from "axios";
 import { speak } from "../utils/speak"; // ✅ Import the TTS utility
 
-export default function ObjectOrientedProgramming() {
+export default function SystemDesignBasics() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
   const [response, setResponse] = useState("");
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
 
-  // Fetch a random OOP question from backend
+  // Fetch a random System Design question from backend
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random?topics=object-oriented-programming");
+      const res = await axios.get("http://localhost:5000/api/questions/random?topics=system-design-basics");
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
@@ -31,6 +31,7 @@ export default function ObjectOrientedProgramming() {
     fetchRandomQuestion();
   }, []);
 
+  // Speech recognition setup
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -82,9 +83,9 @@ export default function ObjectOrientedProgramming() {
   return (
     <div className="topic-bg">
       <div className="topic-content">
-        <h1>Object-Oriented Programming</h1>
+        <h1>System Design Basics</h1>
         <p>
-          Welcome to the Object-Oriented Programming page! Here you can learn about classes, objects, inheritance, polymorphism, and more.
+          Welcome to the System Design Basics page! Here you can learn about scalability, load balancing, databases, caching, and more.
         </p>
         <hr style={{ margin: "30px 0" }} />
         <h2 className="ai-interviewer-title">AI Interviewer</h2>

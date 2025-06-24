@@ -8,7 +8,7 @@ export default function UPSC({ showTopics }) {
       </div>
       {showTopics && (
         <ul className="upsc-list-scroll">
-          <li>Indian Polity & Constitution</li>
+          {/* <li>Indian Polity & Constitution</li>
           <li>Modern Indian History</li>
           <li>Geography (India & World)</li>
           <li>Economics & Budget</li>
@@ -17,7 +17,8 @@ export default function UPSC({ showTopics }) {
           <li>Current Affairs</li>
           <li>Governance & Social Justice</li>
           <li>International Relations</li>
-          <li>Ethics, Integrity & Aptitude</li>
+          <li>Ethics, Integrity & Aptitude</li> */}
+          <h4>Coming soon!</h4>
         </ul>
       )}
     </div>
