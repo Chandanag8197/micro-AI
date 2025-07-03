@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useAuth } from "./context/AuthContext.jsx"; // 🔁 Ensure the path is correct
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -18,7 +20,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:5000/api/users/login`, form);
+      const res = await axios.post(`${baseUrl}/api/users/login`, form);
       
       // Assume response = { token, name, email }
       const userData = {

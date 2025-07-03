@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Register.css";
 
-//const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -83,7 +83,7 @@ export default function Register() {
     // }
 
     try {
-      await axios.post(`http://localhost:5000/api/users/register`, {
+      await axios.post(`${baseUrl}/api/users/register`, {
         name: form.name,
         email: form.email,
         password: form.password,
