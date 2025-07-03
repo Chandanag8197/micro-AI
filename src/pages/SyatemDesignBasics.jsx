@@ -3,6 +3,8 @@ import "./TopicPage.css";
 import axios from "axios";
 import { speak } from "../utils/speak"; // ✅ Import the TTS utility
 
+//const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function SystemDesignBasics() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
@@ -13,7 +15,7 @@ export default function SystemDesignBasics() {
   // Fetch a random System Design question from backend
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random?topics=system-design-basics");
+      const res = await axios.get(`http://localhost:5000/api/questions/random?topics=system-design-basics`);
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
@@ -69,7 +71,7 @@ export default function SystemDesignBasics() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/submit', {
+      const res = await axios.post(`http://localhost:5000/api/submit`, {
         answer: textAnswer,
         questionText: question,
       });

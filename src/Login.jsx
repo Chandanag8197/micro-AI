@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useAuth } from "./context/AuthContext.jsx"; // 🔁 Ensure the path is correct
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false); // ✅ Added
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,10 +18,19 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", form);
-      localStorage.setItem("token", res.data.token);
+      const res = await axios.post(`http://localhost:5000/api/users/login`, form);
+      
+      // Assume response = { token, name, email }
+      const userData = {
+        name: res.data.name,
+        email: res.data.email,
+        token: res.data.token,
+      };
+
+      // ✅ Call login with rememberMe option
+      login(userData, rememberMe);
+
       alert("✅ Logged in successfully!");
-      // Redirect to home page after successful login
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -29,15 +41,17 @@ function Login() {
     <div className="login-bg">
       <form className="login-form" onSubmit={handleSubmit}>
         <h1 className="login-title">Sign In</h1>
+
         <input
           className="login-input"
-          type="email"
+          type="text"
           name="email"
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
           required
         />
+
         <input
           className="login-input"
           type="password"
@@ -47,17 +61,26 @@ function Login() {
           onChange={handleChange}
           required
         />
+
         {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+
         <div className="login-options">
-  <label>
-    <input type="checkbox" /> Remember me
-  </label>
-  <Link to="/forgot-password" className="forgot-link">Forgot Password</Link>
-</div>
+          <label>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            /> Remember me
+          </label>
+          <Link to="/forgot-password" className="forgot-link">Forgot Password</Link>
+        </div>
+
         <button className="login-btn" type="submit">LOGIN</button>
+
         <div className="register-link">
           Don’t have an account? <Link to="/register">Register here</Link>
         </div>
+
         <button
           type="button"
           className="back-btn"

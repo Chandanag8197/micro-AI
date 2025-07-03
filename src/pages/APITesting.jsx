@@ -3,6 +3,8 @@ import "./TopicPage.css";
 import axios from "axios";
 import { speak } from "../utils/speak";
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 export default function APITesting() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
@@ -10,9 +12,11 @@ export default function APITesting() {
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
 
+   
+
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random?topics=api-testing");
+      const res = await axios.get(`${baseUrl}/api/questions/random?topics=api-testing`);
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
@@ -60,7 +64,7 @@ export default function APITesting() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/submit', {
+      const res = await axios.post(`http://localhost:5000/api/submit`, {
         answer: textAnswer,
         questionText: question,
       });

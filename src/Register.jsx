@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Register.css";
 
+//const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -13,7 +15,7 @@ export default function Register() {
   });
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [checkingName, setCheckingName] = useState(false);
+  // const [checkingName, setCheckingName] = useState(false);
   const navigate = useNavigate();
 
   // Password validation function
@@ -24,18 +26,18 @@ export default function Register() {
     return "";
   };
 
-  // Check if name is unique (call backend)
-  const checkNameUnique = async (name) => {
-    setCheckingName(true);
-    try {
-      const res = await axios.post("http://localhost:5000/api/users/check-name", { name });
-      setCheckingName(false);
-      return res.data.unique;
-    } catch {
-      setCheckingName(false);
-      return false;
-    }
-  };
+  // // Check if name is unique (call backend)
+  // const checkNameUnique = async (name) => {
+  //   setCheckingName(true);
+  //   try {
+  //     const res = await axios.post(`http://localhost:5000/api/users/check-name`, { name });
+  //     setCheckingName(false);
+  //     return res.data.unique;
+  //   } catch {
+  //     setCheckingName(false);
+  //     return false;
+  //   }
+  // };
 
   const handleChange = async (e) => {
     const { name, value, type, checked } = e.target;
@@ -74,14 +76,14 @@ export default function Register() {
     }
 
     // Name uniqueness
-    const unique = await checkNameUnique(form.name.trim());
-    if (!unique) {
-      setError("Name is already taken.");
-      return;
-    }
+    // const unique = await checkNameUnique(form.name.trim());
+    // if (!unique) {
+    //   setError("Name is already taken.");
+    //   return;
+    // }
 
     try {
-      await axios.post("http://localhost:5000/api/users/register", {
+      await axios.post(`http://localhost:5000/api/users/register`, {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -150,7 +152,7 @@ export default function Register() {
             Terms of service
           </Link>
         </label>
-        <button className="register-btn" type="submit" disabled={checkingName}>SIGN UP</button>
+        <button className="register-btn" type="submit">SIGN UP</button>
         <div className="register-login-link">
           Have already an account?{" "}
           <a

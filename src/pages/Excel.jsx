@@ -3,6 +3,9 @@ import "./TopicPage.css";
 import axios from "axios";
 import { speak } from "../utils/speak";
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
+
 export default function ExcelFormulasFunctions() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
@@ -12,7 +15,7 @@ export default function ExcelFormulasFunctions() {
 
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/questions/random?topics=excel-formulas-functions");
+      const res = await axios.get(`${baseUrl}/api/questions/random?topics=excel-formulas-functions`);
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
@@ -60,7 +63,7 @@ export default function ExcelFormulasFunctions() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/submit', {
+      const res = await axios.post(`${baseUrl}/api/submit`, {
         answer: textAnswer,
         questionText: question,
       });

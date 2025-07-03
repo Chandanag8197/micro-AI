@@ -1,5 +1,5 @@
 import React from "react";
-import "./Features.css"; // Import the CSS file
+import "./About.css";
 
 const features = [
   {
@@ -26,37 +26,28 @@ const features = [
 
 export default function Features() {
   return (
-    <main>
-      {/* Navbar should be outside this component or above this <main> in your layout */}
-      <div className="features-bg min-h-screen py-12 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-gray-900">
-            Features for Smarter Hiring
-          </h1>
-          <p className="text-lg text-gray-600 mb-12">
-            Our features are meticulously crafted to empower you with the tools you need for streamlined candidate selection, a fairer evaluation environment, and ultimately fully recognized teams.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, idx) => (
-              <div key={idx} className="bg-white rounded-xl shadow p-6">
-                <h2 className="text-xl font-semibold mb-2">{feature.title}</h2>
-                <p className="text-gray-700 mb-4">{feature.description}</p>
-                {feature.stats && (
-                  <div className="flex flex-wrap gap-4">
-                    {feature.stats.map((stat, i) => (
-                      <div key={i} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                        {stat.label}: {stat.value}
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
-                  Learn More
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+    <main className="about-bg">
+      <div className="about-container">
+        <h1>Platform Features</h1>
+        <p>
+          Discover how Micro-AI empowers your hiring process with intelligent tools designed for speed, fairness, and precision.
+        </p>
+
+        {features.map((feature, idx) => (
+          <section key={idx}>
+            <h2>{feature.title}</h2>
+            <p>{feature.description}</p>
+            {feature.stats && (
+              <ul>
+                {feature.stats.map((stat, i) => (
+                  <li key={i}>
+                    <strong>{stat.label}:</strong> {stat.value}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
       </div>
     </main>
   );

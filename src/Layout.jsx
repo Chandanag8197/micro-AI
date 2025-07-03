@@ -1,53 +1,61 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext.jsx";
+import { useCart } from "./context/CartContext";
+import { FaShoppingCart } from "react-icons/fa";
+import "./Layout.css"; // ✅ Add this line
 
 function Layout() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const { cartCount } = useCart();
+
   return (
-    <div>
-      {/* Header with Navigation */}
+    <div className="layout-container">
       <header className="fixed-header">
         <nav className="main-nav">
-          <button
-      className="login-icon"
-      title="Login"
-      onClick={() => navigate("/login")}
-      style={{
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-        paddingLeft: "16px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop: "-20px" // Remove negative margin
-      }}
-    >
-      <img
-        src="./assets/login.png"
-        alt="Login"
-        style={{ width: 35, height: 35, borderRadius: 10, marginBottom: 4 }}
-      />
-      <span style={{ fontSize: 12, color: "#222" }}>Login</span>
-    </button>
-          <ul>
+          {/* Login/Logout */}
+          <div className="login-area">
+            <button
+              className="login-icon"
+              title={user ? user.name || user.email : "Login"}
+              onClick={() => {
+                user ? (logout() && navigate("/login")) : navigate("/login");
+              }}
+            >
+              <img src="/assets/login.png" alt="User" />
+              <span>{user ? user.name || user.email : "Login"}</span>
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/features">Features</Link></li>
             <li><Link to="/contact">Contact</Link></li>
           </ul>
+
+          {/* Cart */}
+          <div className="cart-area">
+            <Link to="/cart" title="Cart" className="cart-link">
+              <div className="cart-icon-wrapper">
+                <FaShoppingCart size={32} />
+                {cartCount > 0 && (
+                  <span className="cart-count">{cartCount}</span>
+                )}
+              </div>
+              <span className="cart-label">Cart</span>
+            </Link>
+          </div>
         </nav>
       </header>
 
-      {/* Main content area */}
-      <main style={{ padding: '0px' }}>
+      <main className="main-content">
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer style={{ textAlign: 'center', padding: '10px', borderTop: '1px solid #ccc' }}>
+      <footer className="footer">
         <small>&copy; 2025 Micro-AI. All rights reserved.</small>
       </footer>
     </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -13,7 +15,7 @@ function ForgotPassword() {
     setError("");
     setMessage("");
     try {
-      await axios.post("http://localhost:5000/api/users/forgot-password", { email });
+      await axios.post(`http://localhost:5000/api/users/forgot-password`, { email });
       setMessage("Password reset link sent! Please check your email.");
       setTimeout(() => navigate("/login"), 2500); // Redirect after 2.5 seconds
     } catch (err) {

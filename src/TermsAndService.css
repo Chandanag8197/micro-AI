@@ -1,44 +1,36 @@
 .terms-bg {
+  position: fixed;
+  top: 60px; /* Same as navbar height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
   background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px; /* Adjust this value to match your navbar height */
+  padding: 30px 1rem 2rem;
 }
 
+/* Adjust container if needed */
 .terms-container {
   background: #fff;
   border-radius: 0rem;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
   border: 1px solid #e5e7eb;
+  max-width: 960px;
+  margin: auto;
+}
+.terms-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
 }
 
-.terms-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a2a3a;
-  letter-spacing: -1px;
+.terms-table th,
+.terms-table td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  vertical-align: top;
 }
 
-.terms-date {
-  font-size: 1rem;
-  color: #64748b;
-}
-
-.terms-section-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #06b6d4;
-  margin-bottom: 0.5rem;
-}
-
-.terms-link {
-  color: #06b6d4;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-.terms-link:hover {
-     color: #0ea5e9;
+.terms-table th {
+  background-color: #f1f5f9;
 }
