@@ -1,30 +1,46 @@
-/* Layout.css */
-
-/* General Layout */
+/* Root Elements */
 html, body, #root {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
+/* Layout Container */
 .layout-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-/* Header */
-.fixed-header {
-  background: #19a7e0;
   width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
+.fixed-header {
+  height: 66px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #0288d1;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
-  padding: 0 16px;
+  height: 48px; /* Match reduced header height */
+  padding: 0; /* Reduced padding slightly */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Login Area */
@@ -37,6 +53,7 @@ html, body, #root {
   height: 100%;
 }
 
+/* Login Icon */
 .login-icon {
   background: none;
   border: none;
@@ -49,22 +66,22 @@ html, body, #root {
 }
 
 .login-icon img {
-  width: 35px;
-  height: 35px;
-  border-radius: 10px;
-  margin-bottom: 4px;
+  width: 24px;  /* Reduced size */
+  height: 24px;
+  border-radius: 8px;
+  margin-bottom: 2px;
 }
 
 .login-icon span {
-  font-size: 12px;
+  font-size: 11px; /* Slightly smaller font */
   color: #222;
   font-weight: 600;
 }
 
-/* Navigation Links */
+/* Nav Links */
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 22px; /* Slightly less gap */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -73,6 +90,7 @@ html, body, #root {
 .nav-links a {
   color: #fff;
   font-weight: 600;
+  font-size: 0.95rem; /* Slightly smaller font */
   text-decoration: none;
 }
 
@@ -94,7 +112,7 @@ html, body, #root {
   justify-content: center;
   color: #222;
   text-decoration: none;
-  height: 60px;
+  height: 40px; /* Reduced from 60px */
   position: relative;
 }
 
@@ -107,18 +125,18 @@ html, body, #root {
 
 .cart-count {
   position: absolute;
-  top: -8px;
-  right: -12px;
+  top: -6px;
+  right: -10px;
   background: #ffffff;
   color: #000000;
   border-radius: 50%;
-  padding: 2px 7px;
-  font-size: 12px;
+  padding: 2px 6px;
+  font-size: 11px;
   font-weight: bold;
 }
 
 .cart-label {
-  font-size: 14px;
+  font-size: 12px; /* Reduced */
   font-weight: 600;
   margin-top: 2px;
   text-align: center;
@@ -127,14 +145,22 @@ html, body, #root {
 /* Main Content */
 .main-content {
   flex: 1;
-  padding: 20px;
+  padding: 48px 0 0 0;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Footer */
 .footer {
+
   text-align: center;
-  padding: 12px;
+  padding: 10px;
   background: #2e2e2e;
   color: #fff;
   margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.95rem;
 }

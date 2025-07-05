@@ -1,6 +1,19 @@
+/* Page Container with Full Background Image */
+.upsc-fixed-container {
+  min-height: 100vh;
+  width: 100%;
+  background: url('/assets/upsc.png') no-repeat center center fixed;
+  background-size: cover;
+  padding-top: 66px; /* Matches fixed header height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Fixed Title Bar for UPSC Page */
 .upsc-title-fixed {
   position: fixed;
-  top: 80px;
+  top: 66px; /* Updated from 80px */
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
@@ -12,26 +25,73 @@
   z-index: 999;
   padding: 5px 0;
   border-radius: 4px 4px 0 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: slideDown 0.6s ease-out forwards;
 }
 
+/* Scrollable List Section */
 .upsc-list-scroll {
   margin: 0 auto;
   max-width: 700px;
-  padding: 120px 0;
-  background: url('/assets/upsc.png');
+  padding: 130px 0 60px; /* Space for header + fixed title */
+  background: none;
   color: #222;
   font-size: 1.3rem;
   list-style: decimal inside;
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the list items horizontally */
+  align-items: center;
+  animation: fadeIn 0.8s ease-in;
 }
 
+/* List Items */
 .upsc-list-scroll li {
-  color: #222;
+  color: #ffffff;
   width: 100%;
   text-align: center;
   margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.upsc-list-scroll li:hover {
+  transform: scale(1.05);
+  color: #ffcc00;
+  cursor: pointer;
+}
+
+/* Link Styling */
+.upsc-list-scroll a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.upsc-list-scroll a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

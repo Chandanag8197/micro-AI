@@ -1,31 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./TopicPage.css";
 import axios from "axios";
-import { speak } from "../utils/speak"; // ✅ Import the TTS utility
+import { speak } from "../utils/speak";
+import EvaluationBox from "../components/EvaluationBox.jsx";
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000"; // Use environment variable or default
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function DataStructuresAlgorithms() {
   const [question, setQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(null);
   const [listening, setListening] = useState(false);
+  const [volume, setVolume] = useState(1);
   const recognitionRef = useRef(null);
+  const micTimeoutRef = useRef(null); // 🕒 Reference to auto-stop timer
 
-  // Fetch a random question from backend
   const fetchRandomQuestion = async () => {
     try {
+      window.speechSynthesis.cancel();
       const res = await axios.get(`${baseUrl}/api/questions/random?topics=data-structures,algorithms`);
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
-      setResponse("");
-      speak(fetchedQuestion); // ✅ Speak the question after setting it
+      setResponse(null);
+      speak(fetchedQuestion, volume);
     } catch (err) {
       console.error("Error fetching question:", err);
       const fallback = "Failed to load question.";
       setQuestion(fallback);
-      speak(fallback); // ✅ Speak error too (optional)
+      speak(fallback, volume);
     }
   };
 
@@ -33,7 +36,6 @@ export default function DataStructuresAlgorithms() {
     fetchRandomQuestion();
   }, []);
 
-  // Speech recognition setup
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -48,7 +50,7 @@ export default function DataStructuresAlgorithms() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      setTextAnswer(prev => prev ? prev + " " + transcript : transcript);
+      setTextAnswer((prev) => (prev ? prev + " " + transcript : transcript));
     };
 
     recognition.onend = () => setListening(false);
@@ -63,9 +65,20 @@ export default function DataStructuresAlgorithms() {
     if (!listening) {
       setListening(true);
       recognitionRef.current.start();
+
+      // 🕒 Stop listening automatically after 1 minute
+      micTimeoutRef.current = setTimeout(() => {
+        recognitionRef.current?.stop();
+        setListening(false);
+      }, 60000);
     } else {
-      setListening(false);
+      // Manual stop
       recognitionRef.current.stop();
+      setListening(false);
+      if (micTimeoutRef.current) {
+        clearTimeout(micTimeoutRef.current);
+        micTimeoutRef.current = null;
+      }
     }
   };
 
@@ -75,10 +88,12 @@ export default function DataStructuresAlgorithms() {
         answer: textAnswer,
         questionText: question,
       });
-      setResponse(res.data.evaluation || "Answer submitted.");
+
+      const { evaluation, matchedKeywords = [], missingKeywords = [] } = res.data;
+      setResponse({ evaluation, matchedKeywords, missingKeywords });
     } catch (error) {
       console.error(error);
-      setResponse("Error submitting answer.");
+      setResponse({ evaluation: "Error submitting answer." });
     }
   };
 
@@ -87,27 +102,43 @@ export default function DataStructuresAlgorithms() {
       <div className="topic-content">
         <h1>Data Structures & Algorithms</h1>
         <p>
-          Welcome to the Data Structures & Algorithms page! Here you can learn about arrays, linked lists, trees, sorting, searching, and more.
+          Welcome to the Data Structures & Algorithms page! Here you can learn about arrays, linked lists, trees,
+          sorting, searching, and more.
         </p>
         <hr style={{ margin: "30px 0" }} />
         <h2 className="ai-interviewer-title">AI Interviewer</h2>
+
+        {/* Question Box */}
         <div className="ai-question-box">
           <strong>Question:</strong> {question}
-          <button
-            onClick={fetchRandomQuestion}
-            style={{ marginLeft: "10px", fontSize: "16px", cursor: "pointer" }}
-            title="Get New Question"
-          >
+          <button onClick={fetchRandomQuestion} title="Get New Question" style={{ marginLeft: 10 }}>
             🔄
           </button>
-          <button
-            onClick={() => speak(question)} // ✅ Speak again button
-            style={{ marginLeft: "10px", fontSize: "16px", cursor: "pointer" }}
-            title="Speak Again"
-          >
-            🔊
-          </button>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginLeft: "10px" }}>
+            <button
+              onClick={() => {
+                window.speechSynthesis.cancel();
+                speak(question, volume);
+              }}
+              title="Speak Again"
+              style={{ fontSize: 16, cursor: "pointer" }}
+            >
+              🔊
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              style={{ width: "100px" }}
+              title="Volume"
+            />
+          </div>
         </div>
+
+        {/* Answer area */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
           <textarea
             className="ai-textarea"
@@ -124,13 +155,18 @@ export default function DataStructuresAlgorithms() {
             🎤
           </button>
         </div>
+
         <button className="ai-submit-btn" onClick={handleSubmit}>
           Submit Answer
         </button>
-        {response && (
-          <div className="ai-response-box">
-            <strong>Evaluation:</strong> {response}
-          </div>
+
+        {/* Evaluation Box */}
+        {response?.evaluation && (
+          <EvaluationBox
+            response={response.evaluation}
+            matchedKeywords={response.matchedKeywords}
+            missingKeywords={response.missingKeywords}
+          />
         )}
       </div>
     </div>
