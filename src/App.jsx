@@ -1,8 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { CartProvider } from "./context/CartContext.jsx"; // ✅ Import CartProvider
-import ProtectedRoute from "./protect_routes.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 import Home from "./Home";
 import Developer from "./developer.jsx";
 import Tester from "./tester.jsx";
@@ -15,7 +14,7 @@ import Register from "./Register.jsx";
 import DataStructuresAlgorithms from "./pages/dsa.jsx";
 import ObjectOrientedProgramming from './pages/OOP.jsx';
 import AdminPanel from "./components/AdminPanel.jsx";  
-import ForgotPassword from "./ForgotPassword.jsx";
+// import ForgotPassword from "./ForgotPassword.jsx"; // 🔐 Commented out
 import SystemDesignBasics from "./pages/SyatemDesignBasics.jsx";
 import VersionControl from "./pages/VersionControl.jsx";
 import DebuggingTesting from "./pages/DebugAndTest.jsx";
@@ -46,53 +45,48 @@ import PaymentPage from "./PaymentPage.jsx";
 export default function App() {
   return (
     <AuthProvider>
-      <CartProvider> {/* ✅ Wrap your app with CartProvider */}
+      <CartProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-            <Route path="features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
-            <Route path="contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+            <Route path="about" element={<About />} />
+            <Route path="features" element={<Features />} />
+            <Route path="contact" element={<Contact />} />
             <Route path="/terms" element={<TermsAndService />} />
-            <Route path="developer" element={<ProtectedRoute><Developer showTopics={true} /></ProtectedRoute>} />
-            <Route path="tester" element={<ProtectedRoute><Tester showTopics={true} /></ProtectedRoute>} />
-            <Route path="data-analyst" element={<ProtectedRoute><DataAnalyst showTopics={true} /></ProtectedRoute>} />
-            <Route path="upsc" element={<ProtectedRoute><UPSC showTopics={true} /></ProtectedRoute>} />
-            <Route path="topics/data-structures-algorithms" element={<ProtectedRoute><DataStructuresAlgorithms /></ProtectedRoute>} />
-            <Route path="topics/object-oriented-programming" element={<ProtectedRoute><ObjectOrientedProgramming /></ProtectedRoute>} />
-            <Route path="topics/system-design-basics" element={<ProtectedRoute><SystemDesignBasics /></ProtectedRoute>} />
-            <Route path="topics/version-control" element={<ProtectedRoute><VersionControl /></ProtectedRoute>} />
-            <Route path="topics/debugging-testing" element={<ProtectedRoute><DebuggingTesting /></ProtectedRoute>} />
-            <Route path="topics/apis-web-services" element={<ProtectedRoute><APIsWebServices /></ProtectedRoute>} />
-            <Route path="topics/databases" element={<ProtectedRoute><Databases /></ProtectedRoute>} />
-            <Route path="topics/frontend-frameworks" element={<ProtectedRoute><FrontendFrameworks /></ProtectedRoute>} />
-            <Route path="topics/backend-development" element={<ProtectedRoute><BackendDevelopment /></ProtectedRoute>} />
-            <Route path="topics/cloud-devops-basics" element={<ProtectedRoute><CloudDevOpsBasics /></ProtectedRoute>} /> 
-            <Route path="/topics/manual-testing-fundamentals" element={<ProtectedRoute><ManualTestingFundamentals /></ProtectedRoute>} />
-            <Route path="/topics/automation-testing-basics" element={<ProtectedRoute><AutomationTestingBasics /></ProtectedRoute>} />
-            <Route path="/topics/testing-tools" element={<ProtectedRoute><TestingTools /></ProtectedRoute>} />
-            <Route path="/topics/api-testing" element={<ProtectedRoute><APITesting /></ProtectedRoute>} />
-            <Route path="/topics/performance-testing" element={<ProtectedRoute><PerformanceTesting /></ProtectedRoute>} />
-            <Route path="/topics/continuous-testing-cicd" element={<ProtectedRoute><ContinuousTestingCICD /></ProtectedRoute>} />
-            <Route path="/topics/excel-formulas-functions" element={<ProtectedRoute><ExcelFormulasFunctions /></ProtectedRoute>} />
-            <Route path="/topics/data-cleaning" element={<ProtectedRoute><DataCleaning /></ProtectedRoute>} />
-            <Route path="/topics/sql-queries" element={<ProtectedRoute><SQLQueries /></ProtectedRoute>} />
-            <Route path="/topics/data-visualization" element={<ProtectedRoute><DataVisualization /></ProtectedRoute>} />
-            <Route path="/topics/python-data-analysis" element={<ProtectedRoute><PythonDataAnalysis /></ProtectedRoute>} />
-            <Route path="/topics/exploratory-data-analysis" element={<ProtectedRoute><ExploratoryDataAnalysis /></ProtectedRoute>} />
-            <Route path="cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-            <Route path="payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-            <Route path="admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="developer" element={<Developer showTopics={true} />} />
+            <Route path="tester" element={<Tester showTopics={true} />} />
+            <Route path="data-analyst" element={<DataAnalyst showTopics={true} />} />
+            <Route path="upsc" element={<UPSC showTopics={true} />} />
+            <Route path="topics/data-structures-algorithms" element={<DataStructuresAlgorithms />} />
+            <Route path="topics/object-oriented-programming" element={<ObjectOrientedProgramming />} />
+            <Route path="topics/system-design-basics" element={<SystemDesignBasics />} />
+            <Route path="topics/version-control" element={<VersionControl />} />
+            <Route path="topics/debugging-testing" element={<DebuggingTesting />} />
+            <Route path="topics/apis-web-services" element={<APIsWebServices />} />
+            <Route path="topics/databases" element={<Databases />} />
+            <Route path="topics/frontend-frameworks" element={<FrontendFrameworks />} />
+            <Route path="topics/backend-development" element={<BackendDevelopment />} />
+            <Route path="topics/cloud-devops-basics" element={<CloudDevOpsBasics />} />
+            <Route path="/topics/manual-testing-fundamentals" element={<ManualTestingFundamentals />} />
+            <Route path="/topics/automation-testing-basics" element={<AutomationTestingBasics />} />
+            <Route path="/topics/testing-tools" element={<TestingTools />} />
+            <Route path="/topics/api-testing" element={<APITesting />} />
+            <Route path="/topics/performance-testing" element={<PerformanceTesting />} />
+            <Route path="/topics/continuous-testing-cicd" element={<ContinuousTestingCICD />} />
+            <Route path="/topics/excel-formulas-functions" element={<ExcelFormulasFunctions />} />
+            <Route path="/topics/data-cleaning" element={<DataCleaning />} />
+            <Route path="/topics/sql-queries" element={<SQLQueries />} />
+            <Route path="/topics/data-visualization" element={<DataVisualization />} />
+            <Route path="/topics/python-data-analysis" element={<PythonDataAnalysis />} />
+            <Route path="/topics/exploratory-data-analysis" element={<ExploratoryDataAnalysis />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="payment" element={<PaymentPage />} />
+            <Route path="admin" element={<AdminPanel />} />
+
+            {/* 🔐 Forgot password route removed */}
+            {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
           </Route>
         </Routes>
       </CartProvider>
