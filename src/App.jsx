@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext.jsx";
-import { CartProvider } from "./context/CartContext.jsx";
+import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx"; // ✅ Import CartProvider
+import ProtectedRoute from "./protect_routes.jsx";
 import Home from "./Home";
 import Developer from "./developer.jsx";
 import Tester from "./tester.jsx";
@@ -14,7 +15,7 @@ import Register from "./Register.jsx";
 import DataStructuresAlgorithms from "./pages/dsa.jsx";
 import ObjectOrientedProgramming from './pages/OOP.jsx';
 import AdminPanel from "./components/AdminPanel.jsx";  
-// import ForgotPassword from "./ForgotPassword.jsx"; // 🔐 Commented out
+import ForgotPassword from "./ForgotPassword.jsx";
 import SystemDesignBasics from "./pages/SyatemDesignBasics.jsx";
 import VersionControl from "./pages/VersionControl.jsx";
 import DebuggingTesting from "./pages/DebugAndTest.jsx";
@@ -46,50 +47,59 @@ export default function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="about" element={<About />} />
-            <Route path="features" element={<Features />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="/terms" element={<TermsAndService />} />
-            <Route path="developer" element={<Developer showTopics={true} />} />
-            <Route path="tester" element={<Tester showTopics={true} />} />
-            <Route path="data-analyst" element={<DataAnalyst showTopics={true} />} />
-            <Route path="upsc" element={<UPSC showTopics={true} />} />
-            <Route path="topics/data-structures-algorithms" element={<DataStructuresAlgorithms />} />
-            <Route path="topics/object-oriented-programming" element={<ObjectOrientedProgramming />} />
-            <Route path="topics/system-design-basics" element={<SystemDesignBasics />} />
-            <Route path="topics/version-control" element={<VersionControl />} />
-            <Route path="topics/debugging-testing" element={<DebuggingTesting />} />
-            <Route path="topics/apis-web-services" element={<APIsWebServices />} />
-            <Route path="topics/databases" element={<Databases />} />
-            <Route path="topics/frontend-frameworks" element={<FrontendFrameworks />} />
-            <Route path="topics/backend-development" element={<BackendDevelopment />} />
-            <Route path="topics/cloud-devops-basics" element={<CloudDevOpsBasics />} />
-            <Route path="/topics/manual-testing-fundamentals" element={<ManualTestingFundamentals />} />
-            <Route path="/topics/automation-testing-basics" element={<AutomationTestingBasics />} />
-            <Route path="/topics/testing-tools" element={<TestingTools />} />
-            <Route path="/topics/api-testing" element={<APITesting />} />
-            <Route path="/topics/performance-testing" element={<PerformanceTesting />} />
-            <Route path="/topics/continuous-testing-cicd" element={<ContinuousTestingCICD />} />
-            <Route path="/topics/excel-formulas-functions" element={<ExcelFormulasFunctions />} />
-            <Route path="/topics/data-cleaning" element={<DataCleaning />} />
-            <Route path="/topics/sql-queries" element={<SQLQueries />} />
-            <Route path="/topics/data-visualization" element={<DataVisualization />} />
-            <Route path="/topics/python-data-analysis" element={<PythonDataAnalysis />} />
-            <Route path="/topics/exploratory-data-analysis" element={<ExploratoryDataAnalysis />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="payment" element={<PaymentPage />} />
-            <Route path="admin" element={<AdminPanel />} />
-
-            {/* 🔐 Forgot password route removed */}
-            {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
-          </Route>
-        </Routes>
+        <AppRoutes />
       </CartProvider>
     </AuthProvider>
+  );
+}
+
+function AppRoutes() {
+  const { loading } = useAuth();
+  if (loading) return null; // Optionally show a loader
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/terms" element={<TermsAndService />} />
+
+      {/* Protected routes */}
+      <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="features" element={<Features />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="developer" element={<Developer showTopics={true} />} />
+        <Route path="tester" element={<Tester showTopics={true} />} />
+        <Route path="data-analyst" element={<DataAnalyst showTopics={true} />} />
+        <Route path="upsc" element={<UPSC showTopics={true} />} />
+        <Route path="topics/data-structures-algorithms" element={<DataStructuresAlgorithms />} />
+        <Route path="topics/object-oriented-programming" element={<ObjectOrientedProgramming />} />
+        <Route path="topics/system-design-basics" element={<SystemDesignBasics />} />
+        <Route path="topics/version-control" element={<VersionControl />} />
+        <Route path="topics/debugging-testing" element={<DebuggingTesting />} />
+        <Route path="topics/apis-web-services" element={<APIsWebServices />} />
+        <Route path="topics/databases" element={<Databases />} />
+        <Route path="topics/frontend-frameworks" element={<FrontendFrameworks />} />
+        <Route path="topics/backend-development" element={<BackendDevelopment />} />
+        <Route path="topics/cloud-devops-basics" element={<CloudDevOpsBasics />} />
+        <Route path="topics/manual-testing-fundamentals" element={<ManualTestingFundamentals />} />
+        <Route path="topics/automation-testing-basics" element={<AutomationTestingBasics />} />
+        <Route path="topics/testing-tools" element={<TestingTools />} />
+        <Route path="topics/api-testing" element={<APITesting />} />
+        <Route path="topics/performance-testing" element={<PerformanceTesting />} />
+        <Route path="topics/continuous-testing-cicd" element={<ContinuousTestingCICD />} />
+        <Route path="topics/excel-formulas-functions" element={<ExcelFormulasFunctions />} />
+        <Route path="topics/data-cleaning" element={<DataCleaning />} />
+        <Route path="topics/sql-queries" element={<SQLQueries />} />
+        <Route path="topics/data-visualization" element={<DataVisualization />} />
+        <Route path="topics/python-data-analysis" element={<PythonDataAnalysis />} />
+        <Route path="topics/exploratory-data-analysis" element={<ExploratoryDataAnalysis />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="payment" element={<PaymentPage />} />
+        <Route path="admin" element={<AdminPanel />} />
+      </Route>
+    </Routes>
   );
 }

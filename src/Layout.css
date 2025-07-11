@@ -25,7 +25,8 @@ html, body, #root {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: #0288d1;
+  background: #ca96a8; /* Deep navy for strong contrast */
+  color: #fff; /* Ensure text is white for readability */
   display: flex;
   align-items: center; /* Center vertically */
   justify-content: center;

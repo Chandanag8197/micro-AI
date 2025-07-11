@@ -1,0 +1,97 @@
+.profile-dropdown {
+  position: relative;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e1f5fe;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profile-icon:hover {
+  background-color: #b3e5fc;
+}
+
+.profile-icon img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-icon span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Dropdown Card as Table */
+.dropdown-card {
+  position: absolute;
+  top: 42px;
+  left: 0; /* ⬅️ Change this from `right: 0` */
+  background-color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  width: 240px;
+  border-radius: 10px;
+  padding: 16px 0 16px 0; /* Remove left and right padding */
+  animation: fadeSlideDown 0.2s ease-out;
+
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+
+/* Entry Row Style */
+.profile-row {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+/* Logout Button */
+.logout-button {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+}
+
+/* Smooth Entry Animation */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

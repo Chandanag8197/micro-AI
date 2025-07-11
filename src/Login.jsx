@@ -41,56 +41,61 @@ function Login() {
 
   return (
     <div className="login-bg">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h1 className="login-title">Sign In</h1>
+      <div className="login-layout">
+        {/* <div className="login-left-panel">
+          <img src="/assets/logo.png" alt="Logo" className="login-logo" />
+        </div> */}
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h1 className="login-title">Sign In</h1>
 
-        <input
-          className="login-input"
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
+          <input
+            className="login-input"
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          className="login-input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+          <input
+            className="login-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
 
-        {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+          {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
 
-        <div className="login-options">
-          <label>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            /> Remember me
-          </label>
-          <Link to="/forgot-password" className="forgot-link">Forgot Password</Link>
-        </div>
+          <div className="login-options">
+            <label>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              /> Remember me
+            </label>
+            <Link to="/forgot-password" className="forgot-link">Forgot Password</Link>
+          </div>
 
-        <button className="login-btn" type="submit">LOGIN</button>
+          <button className="login-btn" type="submit">LOGIN</button>
 
-        <div className="register-link">
-          Don’t have an account? <Link to="/register">Register here</Link>
-        </div>
+          <div className="register-link">
+            Don’t have an account? <Link to="/register">Register here</Link>
+          </div>
 
-        <button
-          type="button"
-          className="back-btn"
-          onClick={() => navigate("/")}
-        >
-          Back to Home
-        </button>
-      </form>
+          {/* <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate("/")}
+          >
+            Back to Home
+          </button> */}
+        </form>
+      </div>
     </div>
   );
 }

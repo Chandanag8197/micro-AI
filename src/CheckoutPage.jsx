@@ -1,15 +1,20 @@
-// src/pages/PaymentPage.jsx
+// src/pages/CheckoutPage.jsx
 import React, { useEffect } from "react";
-import { useCart } from "./context/CartContext";
-import { useAuth } from "./context/AuthContext.jsx";
-import "./Payment.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./Checkout.css"; // Ensure you have a CSS file for styling
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+export default function CheckoutPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const totalAmount = location.state?.totalAmount;
 
-export default function PaymentPage() {
-  const { cartItems } = useCart();
-  const { user } = useAuth();
-  const totalAmount = cartItems.length * 10;
+  // Redirect back if no amount is passed
+  useEffect(() => {
+    if (!totalAmount) {
+      alert("No amount provided. Redirecting to payment page...");
+      navigate("/payment");
+    }
+  }, [totalAmount, navigate]);
 
   // Load Razorpay script
   useEffect(() => {
@@ -21,12 +26,14 @@ export default function PaymentPage() {
 
   const openPayment = async () => {
     try {
-      const res = await fetch(`${baseUrl}/api/payment/create-order`, {
+      const res = await fetch("http://localhost:5000/api/payment/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: totalAmount }),
       });
+
       const data = await res.json();
+
       const options = {
         key: "rzp_test_JTUBgVbUKDh5uO",
         amount: data.amount,
@@ -39,9 +46,9 @@ export default function PaymentPage() {
           alert("Payment Successful!");
         },
         prefill: {
-          name: user?.name || "",
-          email: user?.email || "",
-          contact: user?.contact || "",
+          name: "Chandan A G",
+          email: "agchandan73@gmail.com",
+          contact: "8197805161",
         },
         theme: { color: "#0066cc" },
         method: {
@@ -50,6 +57,7 @@ export default function PaymentPage() {
           netbanking: true,
         },
       };
+
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (err) {
@@ -59,23 +67,13 @@ export default function PaymentPage() {
   };
 
   return (
-    <div className="payment-container">
-      <h2 className="payment-title">Payment & Checkout</h2>
-      <p className="payment-amount">Total Amount: ₹{totalAmount}</p>
-      <div className="cart-summary">
-        <h3>Cart Items</h3>
-        <ul>
-          {cartItems.map((item, idx) => (
-            <li key={idx}>{item.itemName || item.name} - ₹{item.price || 10}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="user-details">
-        <h3>User Details</h3>
-        <p>Name: {user?.name}</p>
-        <p>Email: {user?.email}</p>
-      </div>
-      <button className="pay-now-button" onClick={openPayment}>
+    <div className="checkout-container">
+      <h1 className="checkout-title">Checkout Page</h1>
+      <p className="checkout-amount">Payable Amount: ₹{totalAmount}</p>
+      <button
+        className="checkout-button"
+        onClick={openPayment}
+      >
         Pay ₹{totalAmount}
       </button>
     </div>

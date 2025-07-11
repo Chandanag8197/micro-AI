@@ -32,16 +32,11 @@ export function CartProvider({ children }) {
     localStorage.setItem("paidItems", JSON.stringify(paidItems));
   }, [paidItems]);
 
-  // 🧹 Clear cartItems (used after payment or when user changes)
+  // 🧹 Clear cartItems (used after payment or when user logs out)
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem("cartItems"); // optional: clears localStorage
+    localStorage.removeItem("cartItems");
   };
-
-  // 🔁 Automatically clear cart when user logs in/out
-  useEffect(() => {
-    clearCart();
-  }, [user]);
 
   const addToCart = (item) => {
     if (!cartItems.some(i => i.label === item.label)) {
