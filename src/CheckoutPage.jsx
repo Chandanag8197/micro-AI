@@ -1,22 +1,20 @@
-// src/pages/CheckoutPage.jsx
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./Checkout.css"; // Ensure you have a CSS file for styling
+import { useNavigate } from "react-router-dom";
+import { useCart } from "./context/CartContext.jsx";
+import "./Checkout.css";
 
 export default function CheckoutPage() {
-  const location = useLocation();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
-  const totalAmount = location.state?.totalAmount;
+  const totalAmount = cartItems.length * 10; // Assuming ₹10 per item
 
-  // Redirect back if no amount is passed
   useEffect(() => {
-    if (!totalAmount) {
-      alert("No amount provided. Redirecting to payment page...");
+    if (cartItems.length === 0) {
+      alert("No cart items provided. Redirecting to payment page...");
       navigate("/payment");
     }
-  }, [totalAmount, navigate]);
+  }, [cartItems, navigate]);
 
-  // Load Razorpay script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -68,11 +66,15 @@ export default function CheckoutPage() {
 
   return (
     <div className="checkout-container">
-      <h1 className="checkout-title">Checkout Page</h1>
-      <p className="checkout-amount">Payable Amount: ₹{totalAmount}</p>
+      <h1 className="checkout-title">Payment & Checkout</h1>
+      <p className="checkout-amount">Total Amount: ₹{totalAmount}</p>
+
+      {/* Cart Items section removed */}
+
       <button
         className="checkout-button"
         onClick={openPayment}
+        style={{ marginTop: 32 }}
       >
         Pay ₹{totalAmount}
       </button>

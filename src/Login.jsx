@@ -42,9 +42,9 @@ function Login() {
   return (
     <div className="login-bg">
       <div className="login-layout">
-        {/* <div className="login-left-panel">
+        <div className="login-left-panel">
           <img src="/assets/logo.png" alt="Logo" className="login-logo" />
-        </div> */}
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <h1 className="login-title">Sign In</h1>
 
@@ -86,14 +86,6 @@ function Login() {
           <div className="register-link">
             Don’t have an account? <Link to="/register">Register here</Link>
           </div>
-
-          {/* <button
-            type="button"
-            className="back-btn"
-            onClick={() => navigate("/")}
-          >
-            Back to Home
-          </button> */}
         </form>
       </div>
     </div>

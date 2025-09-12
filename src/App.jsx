@@ -43,6 +43,7 @@ import TermsAndService from "./TermsAndService.jsx";
 import CartPage from "./CartPage.jsx";
 import PaymentPage from "./PaymentPage.jsx";
 
+
 export default function App() {
   return (
     <AuthProvider>
