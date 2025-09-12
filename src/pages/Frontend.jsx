@@ -3,7 +3,7 @@ import "./TopicPage.css";
 import axios from "axios";
 import { speak } from "../utils/speak";
 
-//const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 export default function FrontendFrameworks() {
   const [question, setQuestion] = useState("");
@@ -14,7 +14,7 @@ export default function FrontendFrameworks() {
 
   const fetchRandomQuestion = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/questions/random?topics=frontend-frameworks`);
+      const res = await axios.get(`${VITE_API_BASE_URL}/api/questions/random?topics=frontend-frameworks`);
       const fetchedQuestion = res.data.questionText || "Question not found.";
       setQuestion(fetchedQuestion);
       setTextAnswer("");
@@ -64,7 +64,7 @@ export default function FrontendFrameworks() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/submit`, {
+      const res = await axios.post(`${VITE_API_BASE_URL}/api/submit`, {
         answer: textAnswer,
         questionText: question,
       });
