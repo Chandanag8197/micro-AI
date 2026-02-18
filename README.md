@@ -1,16 +1,5 @@
-<<<<<<< HEAD
-# React + Vite
+AI-Powered Interview Practice Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+micro-AI is an intelligent interview simulation platform that generates topic-specific questions, captures user responses (text or voice), evaluates answers using keyword-based NLP scoring, and provides performance feedback.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# micro-AI
->>>>>>> 0e5a37f9a081fc7f0a9891e2cbba58211313c032
+Built using the MERN stack with AI integration.
